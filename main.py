@@ -14,10 +14,10 @@ def send_at_command(ser, command, delay=1):
 
 # Open TTY
 with serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=2) as ser:
-    time.sleep(2)  # Wait for initialisation
+    time.sleep(2)  # Wait for initialization
     ser.reset_input_buffer()  # Clear input buffer
 
-    # Check connectio with GPRS module
+    # Check connection with GPRS module
     response = send_at_command(ser, "AT")
     if "OK" in response:
         print("[SUCCESS] GPRS is online!")
