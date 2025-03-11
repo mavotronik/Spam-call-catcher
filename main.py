@@ -3,6 +3,7 @@ import threading
 import re
 import yaml
 from gprs import GPRS
+from calls import CALLS
 
 def load_config(file_path="config.yaml"):
     with open(file_path, "r") as f:
@@ -11,6 +12,7 @@ def load_config(file_path="config.yaml"):
 config = load_config()
 
 gprs = GPRS()
+calls = CALLS()
 
 gprs.initialize()
 gprs.test_echo()
@@ -21,6 +23,7 @@ def monitor_signal():
         signal = gprs.get_signal_strength()
         if signal is not None:
             print(f"[INFO] Signal strength: {signal}")
+            time.sleep(60)
 
 def monitor_calls():
     while True:
@@ -28,7 +31,10 @@ def monitor_calls():
         if data:
             if "RING" in data:
                 print("[ALERT] Incoming call detected!")
-                return True
+                if calls.answer_call():
+                    print("[INFO] Call successfully answered")
+                else:
+                    print("[ERROR] Failed to answer call")
             if "+CLIP:" in data:
                 caller_number = data.split('"')[1]
                 print(f"[ALERT] Incoming call from: {caller_number}")
