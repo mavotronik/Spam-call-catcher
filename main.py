@@ -33,6 +33,8 @@ def monitor_calls():
                 print("[ALERT] Incoming call detected!")
                 if calls.answer_call():
                     print("[INFO] Call successfully answered")
+                    time.sleep(10)
+                    calls.end_call()
                 else:
                     print("[ERROR] Failed to answer call")
             if "+CLIP:" in data:
