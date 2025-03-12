@@ -2,3 +2,7 @@ serial:
   port: "/dev/ttyACM0"
   baud_rate: 115200
 
+call_settings:
+  mode: "all"  # "all", "whitelist", "ignore_all"
+  whitelist_path: "whitelist.yaml"
+  blacklist_path: "blacklist.yaml"
