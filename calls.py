@@ -39,5 +39,5 @@ class CALLS:
                     print(f"[ALERT] Incoming call from: {caller_number}")
             time.sleep(2)
 
-threading.Thread(target=CALLS.monitor_calls, daemon=True).start()
+#threading.Thread(target=CALLS.monitor_calls, daemon=True).start()
 
